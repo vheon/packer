@@ -113,5 +113,6 @@ func (s *StepCreateResourceGroup) Cleanup(state multistep.StateBag) {
 		return
 	}
 
-	NewStepDeleteResourceGroup(s.client, ui)
+	step := NewStepDeleteResourceGroup(s.client, ui)
+	step.Run(context.TODO(), state)
 }

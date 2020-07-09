@@ -74,5 +74,7 @@ func (s *StepGetDataDisk) Run(ctx context.Context, state multistep.StateBag) mul
 	return multistep.ActionContinue
 }
 
-func (*StepGetDataDisk) Cleanup(multistep.StateBag) {
+func (s *StepGetDataDisk) Cleanup(state multistep.StateBag) {
+	ui := state.Get("ui").(packer.Ui)
+	NewStepDeleteAdditionalDisks(s.client, ui)
 }

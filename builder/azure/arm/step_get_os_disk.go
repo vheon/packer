@@ -68,5 +68,7 @@ func (s *StepGetOSDisk) Run(ctx context.Context, state multistep.StateBag) multi
 	return multistep.ActionContinue
 }
 
-func (*StepGetOSDisk) Cleanup(multistep.StateBag) {
+func (s *StepGetOSDisk) Cleanup(state multistep.StateBag) {
+	ui := state.Get("ui").(packer.Ui)
+	NewStepDeleteOSDisk(s.client, ui)
 }

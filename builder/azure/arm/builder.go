@@ -221,9 +221,6 @@ func (b *Builder) Run(ctx context.Context, ui packer.Ui, hook packer.Hook) (pack
 			NewStepSnapshotDataDisks(azureClient, ui, &b.config),
 			NewStepCaptureImage(azureClient, ui),
 			NewStepPublishToSharedImageGallery(azureClient, ui, &b.config),
-			NewStepDeleteResourceGroup(azureClient, ui),
-			NewStepDeleteOSDisk(azureClient, ui),
-			NewStepDeleteAdditionalDisks(azureClient, ui),
 		}
 	} else if b.config.OSType == constants.Target_Windows {
 		steps = []multistep.Step{
@@ -264,9 +261,6 @@ func (b *Builder) Run(ctx context.Context, ui packer.Ui, hook packer.Hook) (pack
 			NewStepSnapshotDataDisks(azureClient, ui, &b.config),
 			NewStepCaptureImage(azureClient, ui),
 			NewStepPublishToSharedImageGallery(azureClient, ui, &b.config),
-			NewStepDeleteResourceGroup(azureClient, ui),
-			NewStepDeleteOSDisk(azureClient, ui),
-			NewStepDeleteAdditionalDisks(azureClient, ui),
 		)
 	} else {
 		return nil, fmt.Errorf("Builder does not support the os_type '%s'", b.config.OSType)
